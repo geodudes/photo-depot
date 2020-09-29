@@ -1,5 +1,7 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000;
 
 const path = require('path');
@@ -9,9 +11,13 @@ const tagRouter = require("./routes/tags")
 
 // JSON parser:
 app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+app.use(cookieParser());
 
 // Webpack production
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
   // statically serve everything in the dist folder on the route
   app.use('/dist', express.static(path.resolve(process.cwd(), './dist')));
   // serve index.html on the route '/'

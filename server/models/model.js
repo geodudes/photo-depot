@@ -2,8 +2,10 @@ const {
   Pool
 } = require('pg');
 
+const DB_URL = process.env.NODE_ENV !== 'test' ? process.env.PG_URI : process.env.PG_URI_TEST
+
 const pool = new Pool({
-  connectionString: 'postgres://dmrdamqb:zmSNi5oDQqrVDMLqo3bdsGEnnn9J1oip@lallah.db.elephantsql.com:5432/dmrdamqb',
+  connectionString: DB_URL,
   connectionLimit: 300,
 });
 
