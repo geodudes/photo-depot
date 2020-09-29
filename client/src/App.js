@@ -1,14 +1,18 @@
 import React from 'react';
+import Header from './containers/Header.jsx';
+import SearchBar from './containers/SearchBar.jsx';
+import SideBar from './containers/SideBar.jsx';
+import MainGallery from './containers/MainGallery.jsx';
+import Footer from './containers/Footer.jsx';
 
 function App() {
   return (
-    <div className='App'>
-        <h1>Welcome to
-          <br/>Fullstack Webpack!</h1>
-        <div className='description'>
-          <h4>Visit us at</h4>
-          <h3>https://github.com/Create-Fullstack-Webpack/create-fullstack-webpack-app</h3>
-        </div>
+    <div id='App'>
+      <Header />
+      <SearchBar />
+      <SideBar />
+      <MainGallery />
+      <Footer />
     </div>
   );
 }
