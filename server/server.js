@@ -1,9 +1,11 @@
-
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const path = require('path');
+
+const imageRouter = require("./routes/images")
+const tagRouter = require("./routes/tags")
 
 // JSON parser:
 app.use(express.json());
@@ -18,6 +20,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// IMAGES ROUTER
+app.use('/images', imageRouter);
+
+// // TAGS ROUTER
+// app.use('/tags', tagRouter);
+
 // catch-all endpoint handler
 app.use((req, res) => {
   return res.status(400).send('Page not found.')
@@ -28,7 +36,9 @@ app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unkown middleware error!',
     status: 500,
-    message: { err: 'An error occurred!' }
+    message: {
+      err: 'An error occurred!'
+    }
   };
   const errorObj = Object.assign(defaultErr, err);
   console.log(errorObj.log);
@@ -36,7 +46,7 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(PORT, () => {
-  console.log('Magic happening on ' + PORT);
+  console.log('Listening on ' + PORT);
 });
 
 module.exports = app;
