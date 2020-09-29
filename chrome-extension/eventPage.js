@@ -5,18 +5,26 @@ let contextMenuItem = {
   contexts: ["image"]
 };
 
+// Create context menu
 chrome.contextMenus.create(contextMenuItem);
 
-// chrome.contextMenus.removeAll(function() {
-//   chrome.contextMenus.create(contextMenuItem);
-// });
-
+// Event listener for when contect menu item is selected
 chrome.contextMenus.onClicked.addListener(image => {
-  // alert(`${image.srcUrl}`)
-  // image.srcUrl
-  // document.querySelector('#image-address').innerText = image.srcUrl;
-  // sessionStorage.setItem('TestURL', image.srcUrl)
-  // console.log('Saved')
+  // Send request to server with image url - i.e. image.src.Url
+  fetch('/photos', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      url: image.srcUrl
+    })
+  })
+  .then(res => res.json())
+  .then(res => console.log('RESPONSE: ', res))
+  .catch(err => console.log('Error: ', err))
+
+  // Send image url to popup as a message
   chrome.runtime.sendMessage({
     msg: "imageUrl_sent", 
     data: {
