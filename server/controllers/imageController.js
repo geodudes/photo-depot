@@ -62,5 +62,51 @@ imageController.addImage = (req, res, next) => {
     })
 
 }
+imageController.updateImage = (req, res, next) => {
+
+  //deconstruct url from params
+  const {
+    photoid
+  } = req.params;
+
+  //deconstruct url from query
+  const {
+    rating
+  } = req.query;
+
+  db.query(queries.updateImage, [photoid, rating])
+    .then(data => {
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: `Error occurred with queries.deleteImage: ${err}`,
+        message: {
+          err: 'An error occured with SQL when deleting an image.'
+        },
+      });
+    })
+}
+
+imageController.deleteImage = (req, res, next) => {
+
+  //deconstruct url from params
+  const {
+    photoid
+  } = req.params;
+
+  db.query(queries.deleteImage, [photoid])
+    .then(data => {
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: `Error occurred with queries.deleteImage: ${err}`,
+        message: {
+          err: 'An error occured with SQL when deleting an image.'
+        },
+      });
+    })
+}
 
 module.exports = imageController;
