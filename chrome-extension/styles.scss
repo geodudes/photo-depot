@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
-h1 {
-  color: blue;
+body {
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+#popup {
+  padding: 15px;
+  height: 100px;
+  width: 200px;
+  overflow-wrap: break-word;
+}
+
+h2 {
+  color: #2270d0;
 }
