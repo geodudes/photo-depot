@@ -6,20 +6,27 @@
     "start": "NODE_ENV=production nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "concurrently \"webpack-dev-server --open --hot\" \"NODE_ENV=development nodemon server/server.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
   "dependencies": {
     "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^3.0.0",
     "express": "^4.17.1",
+    "jest": "^26.4.2",
     "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "supertest": "^5.0.0",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5"
   },
