@@ -1,14 +1,9 @@
-
-// FOR SINGLE QUERY
-
-const { Pool } = require('pg');
-
-const PG_URI =
-  // Insert your URI
-  '<INSERT PG URI HERE>';
+const {
+  Pool
+} = require('pg');
 
 const pool = new Pool({
-  connectionString: PG_URI,
+  connectionString: 'postgres://dmrdamqb:zmSNi5oDQqrVDMLqo3bdsGEnnn9J1oip@lallah.db.elephantsql.com:5432/dmrdamqb',
   connectionLimit: 300,
 });
 

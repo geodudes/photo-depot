@@ -1,6 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -17,38 +20,40 @@ module.exports = {
   },
   entry: './client/src/index.js',
   module: {
-    rules: [
-    {
-      test: /.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-react', '@babel/preset-env'],
+    rules: [{
+        test: /.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+          },
         },
       },
-    },
-    {
-      test: /.(css|scss)$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'sass-loader'
-      ]
-    },
-    {
-      test: /.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
-      use: [
-        'file-loader',
-      ],
-    },
-  ]},
-resolve: {
-	extensions: ['.js', '.jsx', ]},
+      {
+        test: /.(css|scss)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader',
+        ],
+      },
+    ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/src/index.html',
     }),
-    new CleanWebpackPlugin(), 
-]
+    new CleanWebpackPlugin(),
+    new Dotenv(),
+  ]
 }
