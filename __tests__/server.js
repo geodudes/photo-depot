@@ -21,6 +21,7 @@ describe('Route integration', () => {
   });
 
   describe('/images', () => {
+    let id;
     describe('GET', () => {
       it('responds with 200 status and application/json content type', () => {
         return request(server)
@@ -61,8 +62,28 @@ describe('Route integration', () => {
             expect(response.body).toEqual(expect.objectContaining({
               photoid: expect.any(Number)
             }))
+            id = response.body.photoid;
           })
 
+      });
+    });
+    describe("PUT", () => {
+      it('responds with 200 status and application/json content type', () => {
+        return request(server)
+          .put(`/images/${id}?rating=4`)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+      });
+    });
+    describe("DELETE", () => {
+      it('responds with 200 status and application/json content type', () => {
+        return request(server)
+          .delete(`/images/${id}`)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
       });
     });
   });
