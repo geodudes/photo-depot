@@ -23,8 +23,6 @@ chrome.contextMenus.onClicked.addListener(image => {
   })
   .then(res => res.json())
   .then(res => {
-
-    res.photoid
     // Send image url and response id, respectively, to popup
     chrome.runtime.sendMessage({
       msg: "imageUrl_sent", 
