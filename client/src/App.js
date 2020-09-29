@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
           <h4>Visit us at</h4>
           <h3>https://github.com/Create-Fullstack-Webpack/create-fullstack-webpack-app</h3>
         </div>
+        <Login />
     </div>
   );
 }

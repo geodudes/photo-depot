@@ -53,6 +53,5 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
-
   ]
 }
