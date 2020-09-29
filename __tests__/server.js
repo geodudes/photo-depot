@@ -21,7 +21,7 @@ describe('Route integration', () => {
   });
 
   describe('/images', () => {
-    let id;
+    let photoid;
     describe('GET', () => {
       it('responds with 200 status and application/json content type', () => {
         return request(server)
@@ -62,7 +62,7 @@ describe('Route integration', () => {
             expect(response.body).toEqual(expect.objectContaining({
               photoid: expect.any(Number)
             }))
-            id = response.body.photoid;
+            photoid = response.body.photoid;
           })
 
       });
@@ -70,7 +70,7 @@ describe('Route integration', () => {
     describe("PUT", () => {
       it('responds with 200 status and application/json content type', () => {
         return request(server)
-          .put(`/images/${id}?rating=4`)
+          .put(`/images/${photoid}?rating=4`)
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200)
@@ -80,7 +80,70 @@ describe('Route integration', () => {
     describe("DELETE", () => {
       it('responds with 200 status and application/json content type', () => {
         return request(server)
-          .delete(`/images/${id}`)
+          .delete(`/images/${photoid}`)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+      });
+    });
+  });
+  describe('/tags', () => {
+    let tagid;
+    describe('GET', () => {
+      it('responds with 200 status and application/json content type', () => {
+        return request(server)
+          .get('/tags')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200);
+      });
+
+      it('returns a list of images in the body of response', () => {
+        const tagList = [{
+          "tagid": 1,
+          "tag": "Monster Trucks",
+          "userid": "1"
+        }];
+        return request(server)
+          .get('/tags')
+          .expect(200)
+          .then(response => {
+            expect([response.body[0]]).toEqual(tagList)
+          })
+      });
+    });
+    describe("POST", () => {
+      it('responds with 200 status and application/json content type with photoid in body', () => {
+        return request(server)
+          .post('/tags')
+          .send({
+            tag: "Testing"
+          })
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .then(response => {
+            expect(response.body).toEqual(expect.objectContaining({
+              tagid: expect.any(Number)
+            }))
+            tagid = response.body.tagid;
+          })
+
+      });
+    });
+    describe("PUT", () => {
+      it('responds with 200 status and application/json content type', () => {
+        return request(server)
+          .put(`/images/${tagid}?photoid=1`)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+      });
+    });
+    describe("DELETE", () => {
+      it('responds with 200 status and application/json content type', () => {
+        return request(server)
+          .delete(`/images/${tagid}`)
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200)

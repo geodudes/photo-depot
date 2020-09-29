@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
 app.use('/images', imageRouter);
 
 // // TAGS ROUTER
-// app.use('/tags', tagRouter);
+app.use('/tags', tagRouter);
 
 // catch-all endpoint handler
 app.use((req, res) => {

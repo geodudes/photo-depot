@@ -3,11 +3,15 @@ const queries = require('../utils/queries');
 
 const imageController = {};
 
+//GETS ALL USERS IMAGES FROM THE DATABASE
 imageController.getImages = (req, res, next) => {
 
-  db.query(queries.getImages)
+  //hard-code userid until sessions set up
+  const userid = 1;
+
+  db.query(queries.getImages, [userid])
     .then(photos => {
-      db.query(queries.getTags)
+      db.query(queries.getAllImageTags, [userid])
         .then(tags => {
           const tagObj = {};
 
@@ -32,6 +36,7 @@ imageController.getImages = (req, res, next) => {
     })
 }
 
+//ADDS AN IMAGE TO THE DATABASE
 imageController.addImage = (req, res, next) => {
 
   //deconstruct url from body
@@ -60,8 +65,9 @@ imageController.addImage = (req, res, next) => {
         },
       });
     })
-
 }
+
+//ADDS RATING TO THE IMAGE
 imageController.updateImage = (req, res, next) => {
 
   //deconstruct url from params
@@ -80,14 +86,15 @@ imageController.updateImage = (req, res, next) => {
     })
     .catch(err => {
       return next({
-        log: `Error occurred with queries.deleteImage: ${err}`,
+        log: `Error occurred with queries.updateImage: ${err}`,
         message: {
-          err: 'An error occured with SQL when deleting an image.'
+          err: 'An error occured with SQL when updating an image.'
         },
       });
     })
 }
 
+//REMOVES USERS IMAGE
 imageController.deleteImage = (req, res, next) => {
 
   //deconstruct url from params
