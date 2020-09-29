@@ -7,8 +7,7 @@ export default function Login() {
     const password = document.querySelector('#password').value;
 
     try {
-      const loginResponse = await 
-      fetch('/api/login', {
+      const loginResponse = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify({
           email,
@@ -18,6 +17,7 @@ export default function Login() {
           'Content-Type': 'application/json',
         },
       })
+      await console.log('loginresponse', loginResponse)
     } 
     catch (error) {
       console.log('Error while attempting login', error);

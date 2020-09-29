@@ -34,7 +34,7 @@ app.use('/images', imageRouter);
 // app.use('/tags', tagRouter);
 
 // API ROUTER
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 // catch-all endpoint handler
 app.use((req, res) => {
