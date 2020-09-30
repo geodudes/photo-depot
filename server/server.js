@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
   app.use('/dist', express.static(path.resolve(process.cwd(), './dist')));
   // serve index.html on the route '/'
   app.get('/', (req, res) => {
-    res.status(200).sendFile(path.resolve(process.cwd(), './client/src/index.html'));
+    return res.status(200).sendFile(path.resolve(process.cwd(), './client/src/index.html'));
   });
 }
 
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
 app.use('/images', imageRouter);
 
 // // TAGS ROUTER
-// app.use('/tags', tagRouter);
+app.use('/tags', tagRouter);
 
 // API ROUTER
 app.use('/api', apiRouter);

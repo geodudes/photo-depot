@@ -1,44 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&family=Julius+Sans+One&family=Baloo+Tamma+2&family=Poiret+One&display=swap');
+@import "~bootstrap/scss/bootstrap";
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
-body {
-  font-family: 'Baloo Tamma 2';
-  margin: 0;
-  padding: 0;
-  background: #f1f1f1b9;
-  background-image: linear-gradient(to bottom right, #f5f5f5b9, #dbdbdbb9);
+// body {
+//   font-family: 'Baloo Tamma 2';
+//   background: #f1f1f1b9;
+// }
+
+// #app {
+//   margin: auto;
+//   margin-top: 150px;
+//   text-align: center;
+//   width: 800px;
+//   background: white;
+//   border: 1px solid #e7e7e7;
+//   box-shadow: 30px 30px 40px 20px #cecece;
+//   border-radius: 20px;
+// }
+
+// #App > div {
+//   border: 1px solid #000000;
+// }
+
+#header {
+  background: #F18C8E;
 }
 
-.App {
-  margin: auto;
-  margin-top: 150px;
-  text-align: center;
-  width: 800px;
-  background: white;
-  border: 1px solid #e7e7e7;
-  box-shadow: 30px 30px 40px 20px #cecece;
-  border-radius: 20px;
+#search-bar {
+  background: #F18C8E;
 }
 
-.App h1 {
-  margin: auto;
-  margin: 100 0 100 0;
-  font-family: 'Alegreya Sans SC';
-  letter-spacing: 6px;
-  font-size: 60px;
-  color: rgb(66, 66, 66);
+.sidebar {
+  background: #568EA6;
+  // position: fixed;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // min-height: 100vh !important;
+  // z-index: 100;
+  // padding: 48px 0 0;
+  // box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
-.App .description {
-  color: rgb(187, 185, 185);
+// #sidebar-wrapper{
+//   min-height: 100vh !important;
+//   width: 100vw;
+//   margin-left: -1rem;
+//   -webkit-transition: margin .25s ease-out;
+//   -moz-transition: margin .25s ease-out;
+//   -o-transition: margin .25s ease-out;
+//   transition: margin .25s ease-out;
+// }
+// #sidebar-wrapper .sidebar-heading {
+//   padding: 0.875rem 1.25rem;
+//   font-size: 1.2rem;
+// }
+
+// #page-content-wrapper {
+//   min-width: 0;
+//   width: 100%;
+// }
+
+//====Original side-bar====//
+#side-bar {
+  background: #568EA6;
 }
 
-.App .description h3 {
-  color: rgb(143, 206, 118);
-  padding: 20 0 20 0;
+#main-gallery {
+  background: #F1D1B5;
+}
+
+#footer {
+  background: #305F72;
 }

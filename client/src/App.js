@@ -1,16 +1,41 @@
 import React from 'react';
 import Login from './Login';
+import Header from './containers/Header.jsx';
+import SearchBar from './containers/SearchBar.jsx';
+import SideBar from './containers/SideBar.jsx';
+import MainGallery from './containers/MainGallery.jsx';
+import Footer from './containers/Footer.jsx';
+import { Container, Row, Col } from 'react-bootstrap'
 
 function App() {
   return (
-    <div className='App'>
-        <h1>Welcome to
-          <br/>Fullstack Webpack!</h1>
-        <div className='description'>
-          <h4>Visit us at</h4>
-          <h3>https://github.com/Create-Fullstack-Webpack/create-fullstack-webpack-app</h3>
-        </div>
-        <Login />
+    <div id='App'>
+      <Login />
+      <Container fluid>
+        <Row>
+          <Col>
+            <Header />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <SearchBar />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={3} xl={2}>
+            <SideBar />
+          </Col>
+          <Col sm={9} xl={10}>
+            <MainGallery />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Footer />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
