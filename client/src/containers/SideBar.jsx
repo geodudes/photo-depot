@@ -18,7 +18,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleGetTags: (tags) => dispatch(actions.getTags(tags)),
-  handleTagInput: (input) => dispatch(actions.createTag(input)),
+  handleTagInput: (input) => dispatch(actions.inputTag(input)),
+  handleAddTagType: (tagObj) => dispatch(actions.addTagType(tagObj)),
   handleAddTag: (tagObj) => dispatch(actions.addTag(tagObj))
 });
 
@@ -44,8 +45,10 @@ const SideBar = (props) => {
       .then(res => res.json())
       .then(res => {
         console.log('res', res) // {tagid: 3}
-        props.handleAddTag({
-          
+        props.handleAddTagType({
+          tagid: res.tagid,
+          tag: tagName,
+          // userid: res.userid
         });
       })
       .catch(err => console.log('Error: ', err))

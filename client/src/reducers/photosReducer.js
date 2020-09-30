@@ -49,31 +49,31 @@ const photosReducer = (state = initialState, action) => {
 
       return { ...state, tags: updatedTags };
 
-    case types.CREATE_TAG:
+    case types.INPUT_TAG:
       updatedTagName = action.payload;
 
       return { ...state, inputTag: updatedTagName };
 
-    // case types.ADD_TAG_TYPE:
-    //   // Note: Duplicate tags already handled by server on submit
+    case types.ADD_TAG_TYPE:
+      // Note: Duplicate tags already handled by server on submit
 
-    //   tagsClone = JSON.parse(JSON.stringify(state.tags));
-    //   tagsClone.push(action.payload);
-
-    //   return { ...state, tags: tagsClone};
-
-    case types.ADD_TAG:
-      photosClone = JSON.parse(JSON.stringify(state.photos));
       tagsClone = JSON.parse(JSON.stringify(state.tags));
+      tagsClone.push(action.payload);
 
-      updatedPhotos = photosClone.map((photo) => {
-        if (photo.photoid === action.payload.photoId) {
-          // Add new tag object to the given photo's tags array
-          photo.tags.push(action.payload.newTag);
-          // Add new tag object to available tags array
-          updatedTags = tagsClone.push(action.payload.newTag);
-        }
-      });
+      return { ...state, tags: tagsClone};
+
+    // case types.ADD_TAG:
+    //   photosClone = JSON.parse(JSON.stringify(state.photos));
+    //   tagsClone = JSON.parse(JSON.stringify(state.tags));
+
+    //   updatedPhotos = photosClone.map((photo) => {
+    //     if (photo.photoid === action.payload.photoId) {
+    //       // Add new tag object to the given photo's tags array
+    //       photo.tags.push(action.payload.newTag);
+    //       // Add new tag object to available tags array
+    //       updatedTags = tagsClone.push(action.payload.newTag);
+    //     }
+    //   });
 
       // COME BACK AND CHECK FOR DUPLICATES
       return { ...state, photos: updatedPhotos, tags: updatedTags };
