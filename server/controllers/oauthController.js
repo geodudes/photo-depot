@@ -35,6 +35,7 @@ oauthController.getAuthURL = (req, res, next) => {
   });
 
   res.locals.url = url;
+  console.log('URLLLLL', url)
   return next();
 };
 
