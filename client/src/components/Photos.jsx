@@ -1,17 +1,26 @@
 import React from 'react';
+import {Container, Row, Col, Image} from 'react-bootstrap'
 
 const Photos = (props) => {
   const { photos } = props;
-  console.log("photos", photos)
 
-  const imgList = photos.map(photo => {
+  const imgList = photos.map((photo, index) => {
     return (
-      <img src={photo.url}></img>
+      // <img src={photo.url}></img>
+      <Image key={`image${index}`} src={photo.url} thumbnail />
     )
   });
 
   return (
-    <div id="photos">{imgList}</div>
+    <div>
+      <Container>
+        <Row>
+          <Col xs={6} md={4}>
+            {imgList}
+          </Col>
+        </Row>
+      </Container>
+    </div>
   )
 }
 

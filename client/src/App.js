@@ -21,10 +21,10 @@ function App() {
           </Col>
         </Row>
         <Row>
-          <Col sm={2} xl={1}>
+          <Col sm={3} xl={2}>
             <SideBar />
           </Col>
-          <Col sm={10} xl={11}>
+          <Col sm={9} xl={10}>
             <MainGallery />
           </Col>
         </Row>
