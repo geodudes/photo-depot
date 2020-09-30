@@ -6,19 +6,21 @@ import {
   NavDropdown,
   Accordion,
   Card,
-  Button
+  Button,
+  InputGroup,
+  FormControl
 } from 'react-bootstrap';
 
 const mapStateToProps = state => ({
   tags: state.photos.tags,
+  inputTag: state.photos.inputTag,
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleGetTags: (tags) => dispatch(actions.getTags(tags))
+  handleGetTags: (tags) => dispatch(actions.getTags(tags)),
+  handleTagInput: (input) => dispatch(actions.createTag(input)),
+  handleAddTag: (tagObj) => dispatch(actions.addTag(tagObj))
 });
-
-
-
 
 const SideBar = (props) => {
   useEffect(() => {
@@ -27,6 +29,27 @@ const SideBar = (props) => {
       .then(res => props.handleGetTags(res))
       .catch(err => console.log(err))
   }, []);
+
+  const handleTagClick = () => {
+    const tagName = props.inputTag.trim();
+    fetch('http://localhost:3000/tags', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        tag: tagName
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log('res', res) // {tagid: 3}
+        props.handleAddTag({
+          
+        });
+      })
+      .catch(err => console.log('Error: ', err))
+  };
 
   const tagList = props.tags.map((tag, index) => {
     return (
@@ -54,7 +77,12 @@ const SideBar = (props) => {
             </Card.Body>
           </Accordion.Collapse>
         </Card>
-
+        <InputGroup className="mb-3">
+          <InputGroup.Prepend>
+            <Button varianßt="outline-secondary" onClick={handleTagClick}>+ Tag</Button>
+          </InputGroup.Prepend>
+          <FormControl aria-describedby="basic-addon1" onChange={e => props.handleTagInput(e.target.value)} />
+        </InputGroup>
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">

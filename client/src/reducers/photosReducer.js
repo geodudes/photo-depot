@@ -4,6 +4,7 @@ const initialState = {
   user: { logginIn: false },
   photos: [],
   tags: [],
+  inputTag: '',
 };
 
 const photosReducer = (state = initialState, action) => {
@@ -12,6 +13,7 @@ const photosReducer = (state = initialState, action) => {
   let updatedPhotos;
   let tagsClone;
   let updatedTags;
+  let updatedTagName;
 
   switch (action.type) {
     case types.GET_PHOTOS:
@@ -46,6 +48,19 @@ const photosReducer = (state = initialState, action) => {
       updatedTags = action.payload;
 
       return { ...state, tags: updatedTags };
+
+    case types.CREATE_TAG:
+      updatedTagName = action.payload;
+
+      return { ...state, inputTag: updatedTagName };
+
+    // case types.ADD_TAG_TYPE:
+    //   // Note: Duplicate tags already handled by server on submit
+
+    //   tagsClone = JSON.parse(JSON.stringify(state.tags));
+    //   tagsClone.push(action.payload);
+
+    //   return { ...state, tags: tagsClone};
 
     case types.ADD_TAG:
       photosClone = JSON.parse(JSON.stringify(state.photos));

@@ -15,9 +15,15 @@ export const addRating = ({ photoId, rating }) => ({
   payload: { photoId, rating },
 });
 
+
 export const getTags = (tags) => ({
   type: types.GET_TAGS,
   payload: tags,
+});
+
+export const createTag = (input) => ({
+  type: types.CREATE_TAG,
+  payload: input,
 });
 
 // Need to wait to get new tagId from the server (database)
