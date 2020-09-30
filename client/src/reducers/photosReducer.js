@@ -15,8 +15,7 @@ const photosReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.GET_PHOTOS:
-      updatedPhotos = action.payload.photos;
-      photos = updatedPhotos;
+      photos = action.payload;
 
       return { ...state, photos };
 
@@ -41,7 +40,7 @@ const photosReducer = (state = initialState, action) => {
       return { ...state, photos: updatedPhotos };
 
     case types.GET_TAGS:
-      updatedTags = action.payload.tags;
+      updatedTags = action.payload;
 
       return { ...state, tags: updatedTags };
 
