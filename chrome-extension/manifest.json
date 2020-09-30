@@ -11,13 +11,15 @@
     }
   ],
   "icons": {
-    "128": "./images/blue-flame.png"
+    "128": "./images/photo-depot-128px.png"
   },
   "browser_action": {
     "default_title": "Tool Tip: TEST default_title",      
     "default_popup": "./popup.html",
     "default_icon": {                   
-      "16": "./images/hello_extensions.png"
+      "16": "./images/photo-depot-16px.png",
+      "48": "./images/photo-depot-48px.png",
+      "128": "./images/photo-depot-128px.png"
     }
   },
   "background": {

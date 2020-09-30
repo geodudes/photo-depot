@@ -7,6 +7,7 @@ const initialState = {
 };
 
 const photosReducer = (state = initialState, action) => {
+  let photos;
   let photosClone;
   let updatedPhotos;
   let tagsClone;
@@ -14,9 +15,9 @@ const photosReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.GET_PHOTOS:
-      updatedPhotos = action.payload.photos;
+      photos = action.payload;
 
-      return { ...state, photos: updatedPhotos };
+      return { ...state, photos };
 
     case types.DELETE_PHOTO:
       photosClone = JSON.parse(JSON.stringify(state.photos));
@@ -39,7 +40,7 @@ const photosReducer = (state = initialState, action) => {
       return { ...state, photos: updatedPhotos };
 
     case types.GET_TAGS:
-      updatedTags = action.payload.tags;
+      updatedTags = action.payload;
 
       return { ...state, tags: updatedTags };
 

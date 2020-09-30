@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
   app.use('/dist', express.static(path.resolve(process.cwd(), './dist')));
   // serve index.html on the route '/'
   app.get('/', (req, res) => {
-    res.status(200).sendFile(path.resolve(process.cwd(), './client/src/index.html'));
+    return res.status(200).sendFile(path.resolve(process.cwd(), './client/src/index.html'));
   });
 }
 
