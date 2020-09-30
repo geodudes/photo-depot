@@ -7,17 +7,36 @@ import * as actions from '../actions/actions';
 //   });
   
 const mapDispatchToProps = dispatch => ({
-  handleDeletePhoto: (photoid) => dispatch(actions.deletePhoto(photoid))
+  handleDeletePhoto: (photoid) => dispatch(actions.deletePhoto(photoid)),
+  handleAddTag: (photoid, newTag) => dispatch(actions.addTag(photoid, newTag))
 });
+
+const deleteFromServer = (id) => {
+  console.log('DELETE')
+  fetch(`http://localhost:3000/images/${id}`, {
+    method: 'DELETE',
+    // headers: {
+    //   'Access-Control-Allow-Origin': '*'
+    // },
+    // body: JSON.stringify({
+    //   url: imageUrl
+    // })
+  })
+  .then(res => res.json())
+  .catch(err => console.log('Error: ', err))
+}
 
 const Photo = (props) => {
   const { url, photoid } = props;
   return (
     <div className="photo">
-      <button photoid={photoid} onClick={() => props.handleDeletePhoto(photoid)} >X</button>
+      <button photoid={photoid} onClick={() => {
+        props.handleDeletePhoto(photoid);
+        deleteFromServer(photoid);
+      }} >X</button>
       <img src={url}></img>
       <input type="text"/>
-      <button>Save Tag</button>
+      <button onClick={() => props.handleAddTag()}>Save Tag</button>
     </div>
   )
 }
