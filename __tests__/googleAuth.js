@@ -1,9 +1,11 @@
 const request = require('supertest');
 const server = 'http://localhost:3000';
+const app = require('express');
 
 /**
  * Read the docs! https://www.npmjs.com/package/supertest
  */
+
 describe('Google OAuth process', () => {
 
   describe('Contains Valid Google OAuth Credentials', () => {
@@ -21,13 +23,11 @@ describe('Google OAuth process', () => {
   });
 
   describe('/api', () => {
-    describe('/getAuthURL', () => {
       const correctURL = 'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&prompt=consent&client_id=265226410890-ccp33d5sp4nom25nvdf6pq3eq1bet230.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Flogin%2Fgoogle'
-      it('responds with correct URL', (done) => {
+      it('getAuthURL Redirects with correct URL', (done) => {
         return request(server)
           .get('/api/getAuthURL')
           .expect(`Found. Redirecting to ${correctURL}`, done)
-      });
     });
   });
   

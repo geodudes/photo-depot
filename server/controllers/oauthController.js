@@ -42,6 +42,7 @@ oauthController.getAuthURL = (req, res, next) => {
 // =================================== //
 
 oauthController.getAuthCode = async (req, res, next) => {
+  // console.log('REQ.QUERY', req.query)
   const { tokens } = await oauth2Client.getToken(req.query.code); // Tokens contains access_token, refresh_token, scope, id-token
   oauth2Client.setCredentials(tokens); // Actually logs you in
   res.locals.token = tokens.id_token; // Store the id token for setting the cookie
