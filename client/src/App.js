@@ -32,7 +32,7 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <Footer />
+            {/* <Footer /> */}
           </Col>
         </Row>
       </Container>
