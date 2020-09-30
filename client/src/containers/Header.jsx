@@ -1,8 +1,11 @@
 import React from 'react';
+import { Button } from 'react-bootstrap'
 
 const Header = () => {
   return (
-    <div id="header">Header</div>
+    <div id="header">
+      <Button variant="outline-primary">Primary</Button>{' '}
+    </div>
   )
 }
 

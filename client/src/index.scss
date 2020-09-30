@@ -1,13 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
-body {
-  font-family: 'Baloo Tamma 2';
-  background: #f1f1f1b9;
-}
+// body {
+//   font-family: 'Baloo Tamma 2';
+//   background: #f1f1f1b9;
+// }
 
 // #app {
 //   margin: auto;
@@ -20,9 +22,9 @@ body {
 //   border-radius: 20px;
 // }
 
-#App > div {
-  border: 1px solid #000000;
-}
+// #App > div {
+//   border: 1px solid #000000;
+// }
 
 #header {
   background: #F18C8E;
