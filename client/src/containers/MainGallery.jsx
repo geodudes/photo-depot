@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import Photos from '../components/Photos'
+import PhotosAll from '../components/PhotosAll'
 
 const mapStateToProps = state => ({
   photos: state.photos.photos,
 });
 
 const mapDispatchToProps = dispatch => ({
- handleGetPhotos: (photos) => dispatch(actions.getPhotos(photos))
+  handleGetPhotos: (photos) => dispatch(actions.getPhotos(photos))
 });
 
 const MainGallery = (props) => {
@@ -21,7 +21,7 @@ const MainGallery = (props) => {
 
   return (
     <div id="main-gallery">
-      <Photos photos={props.photos} />    
+      <PhotosAll photos={props.photos} />
     </div>
   )
 }

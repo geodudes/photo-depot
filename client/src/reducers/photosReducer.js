@@ -23,8 +23,11 @@ const photosReducer = (state = initialState, action) => {
       photosClone = JSON.parse(JSON.stringify(state.photos));
 
       updatedPhotos = photosClone.filter(
-        (photo) => photo.photoid !== action.payload
-      );
+        (photo) => {
+          console.log(photo.photoid, action.payload)
+          return photo.photoid !== action.payload
+        });
+      console.log('updated photos', updatedPhotos)
 
       return { ...state, photos: updatedPhotos };
 
