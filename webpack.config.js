@@ -18,6 +18,8 @@ module.exports = {
     contentBase: './client/src',
     proxy: {
       '/images': 'http://localhost:3000',
+      '/tags': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
     },
     hot: true,
   },

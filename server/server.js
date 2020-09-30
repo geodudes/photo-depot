@@ -8,6 +8,7 @@ const path = require('path');
 
 const imageRouter = require("./routes/images")
 const tagRouter = require("./routes/tags")
+const apiRouter = require("./routes/api")
 
 // JSON parser:
 app.use(express.json());
@@ -30,7 +31,10 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
 app.use('/images', imageRouter);
 
 // // TAGS ROUTER
-// app.use('/tags', tagRouter);
+app.use('/tags', tagRouter);
+
+// API ROUTER
+app.use('/api', apiRouter);
 
 // catch-all endpoint handler
 app.use((req, res) => {
