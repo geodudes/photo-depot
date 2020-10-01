@@ -9,20 +9,26 @@ CASCADE;
 
 CREATE TABLE users
 (
-  "userid" serial PRIMARY KEY,
-  "name" varchar NOT NULL CHECK ( name <> '')
+  "id" serial PRIMARY KEY,
+  "userid" varchar NOT NULL,
+  "name" varchar NOT NULL CHECK ( name <> ''),
+  UNIQUE ( userid )
 );
 
-SELECT setval('users_userid_seq', 1, false);
+SELECT setval('users_id_seq', 1, false);
 
 CREATE TABLE photos
 (
   "photoid" serial PRIMARY KEY,
-  "url" varchar NOT NULL,
-  "userid" bigint NOT NULL,
+  "url" varchar NOT NULL CHECK (url <> ''),
+  "userid" varchar NOT NULL,
   "date" varchar NOT NULL,
   "rating" smallint,
-  CONSTRAINT fk_user FOREIGN KEY ( userid ) REFERENCES users ( userid ) ON DELETE CASCADE
+  UNIQUE ( url ),
+  CONSTRAINT fk_user FOREIGN KEY
+  ( userid ) REFERENCES users
+  ( userid ) ON
+  DELETE CASCADE
 );
 
 SELECT setval('photos_photoid_seq', 1, false);
@@ -31,7 +37,8 @@ CREATE TABLE tags
 (
   "tagid" serial PRIMARY KEY,
   "tag" varchar NOT NULL CHECK ( tag <> ''),
-  "userid" bigint NOT NULL,
+  "userid" varchar NOT NULL,
+  UNIQUE ( tag ),
   CONSTRAINT fk_user FOREIGN KEY ( userid ) REFERENCES users ( userid ) ON DELETE CASCADE
 );
 
@@ -39,7 +46,7 @@ SELECT setval('tags_tagid_seq', 1, false);
 
 CREATE TABLE phototags
 (
-  "userid" bigint NOT NULL,
+  "userid" varchar NOT NULL,
   "photoid" bigint NOT NULL,
   "tagid" bigint NOT NULL,
   CONSTRAINT fk_photo FOREIGN KEY ( photoid ) REFERENCES photos ( photoid ) ON DELETE CASCADE,
@@ -48,8 +55,8 @@ CREATE TABLE phototags
 );
 
 INSERT INTO users
-  (name)
-VALUES('Marc');
+  (name, userid)
+VALUES('Marc', '1');
 
 INSERT INTO photos
   (url, userid, date, rating)

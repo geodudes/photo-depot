@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 3000;
 
 const path = require('path');
 
+const wsServer = require("./wsServer")
+
 const imageRouter = require("./routes/images")
 const tagRouter = require("./routes/tags")
 const apiRouter = require("./routes/api")
@@ -16,6 +18,18 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
+
+//*** WEBSOCKETS ****/
+// I'm maintaining all active ws connections in this object
+const clients = {};
+// I'm maintaining all active ws users in this object
+const users = {};
+//install client and users to global middleware
+app.use((req, res, next) => {
+  res.locals.clients = clients;
+  res.locals.users = users;
+  return next()
+})
 
 // Webpack production
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
@@ -55,8 +69,14 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 })
 
-app.listen(PORT, () => {
+// `server` is a vanilla Node.js HTTP server, so use
+// the same ws upgrade process described here:
+// https://www.npmjs.com/package/ws#multiple-servers-sharing-a-single-https-server
+const server = app.listen(PORT, () => {
   console.log('Listening on ' + PORT);
 });
+
+//start web socket server
+wsServer(server, clients, users);
 
 module.exports = app;
