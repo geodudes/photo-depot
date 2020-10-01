@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
   handleGetTags: (tags) => dispatch(actions.getTags(tags)),
   handleTagInput: (input) => dispatch(actions.inputTag(input)),
   handleAddTagType: (tagObj) => dispatch(actions.addTagType(tagObj)),
-  handleAddTag: (tagObj) => dispatch(actions.addTag(tagObj))
+  handleAddTag: (tagObj) => dispatch(actions.addTag(tagObj)),
+  handleFilterByTag: (tagName) => dispatch(actions.filterByTag(tagName)), // insert parameters
 });
 
 const SideBar = (props) => {
@@ -59,6 +60,7 @@ const SideBar = (props) => {
       <button
         key={`tag${index}`}
         className="button-tag"
+        onClick={() => { props.handleFilterByTag(tag.tag) }}
       >{tag.tag}</button>
     )
   });

@@ -8,3 +8,4 @@ export const INPUT_TAG = 'INPUT_TAG';
 export const ADD_TAG_TYPE = 'ADD_TAG_TYPE';
 export const ADD_TAG_PHOTO = 'ADD_TAG_PHOTO';
 export const REMOVE_TAG = 'REMOVE_TAG';
+export const FILTER_BY_TAG = 'FILTER_BY_TAG';

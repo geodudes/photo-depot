@@ -57,3 +57,8 @@ export const removeTag = ({ photoId, trashTag: { tagId, tag } }) => ({
   type: types.REMOVE_TAG,
   payload: { photoId, trashTag },
 });
+
+export const filterByTag = (tagName) => ({
+  type: types.FILTER_BY_TAG,
+  payload: tagName,
+});

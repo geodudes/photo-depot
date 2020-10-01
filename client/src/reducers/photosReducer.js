@@ -1,10 +1,8 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  user: {
-    logginIn: false
-  },
   photos: [],
+  filteredPhotos: [],
   tags: [],
   inputTag: '',
 };
@@ -16,6 +14,8 @@ const photosReducer = (state = initialState, action) => {
   let tagsClone;
   let updatedTags;
   let updatedTagName;
+  let filter;
+  let filteredPhotos;
 
   switch (action.type) {
     case types.GET_PHOTOS:
@@ -81,7 +81,6 @@ const photosReducer = (state = initialState, action) => {
       return { ...state, tags: tagsClone };
 
     case types.ADD_TAG_PHOTO:
-      console.log('ADD_TAG_PHOTO!!!')
       photosClone = JSON.parse(JSON.stringify(state.photos));
 
       updatedPhotos = photosClone.map((photo) => {
@@ -92,8 +91,13 @@ const photosReducer = (state = initialState, action) => {
         return photo;
       });
 
-      // COME BACK AND CHECK FOR DUPLICATES
       return { ...state, photos: updatedPhotos };
+
+    case types.FILTER_BY_TAG:
+      photosClone = JSON.parse(JSON.stringify(state.photos));
+      filteredPhotos = photosClone.filter(photo => photo.tags.includes(action.payload))
+
+      return { ...state, filteredPhotos };
 
     case types.REMOVE_TAG:
       photosClone = JSON.parse(JSON.stringify(state.photos));
@@ -112,7 +116,6 @@ const photosReducer = (state = initialState, action) => {
         }
       });
 
-      // COME BACK AND CHECK FOR DUPLICATES
       return {
         ...state, photos: updatedPhotos, tags: updatedTags
       };
