@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import {
-  DropdownButton,
-  SplitButton,
-  ButtonGroup,
-  Dropdown
-} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 const mapStateToProps = state => ({
   tags: state.photos.tags,
@@ -32,17 +27,30 @@ const deleteFromServer = (id) => {
     .catch(err => console.log('Error: ', err))
 }
 
+const addTagToPhoto = (photoid, tagid) => {
+  console.log('PUT')
+  fetch(`http://localhost:3000/tags/${tagid}?photoid=${photoid}`, {
+    method: 'PUT',
+  })
+    .then(res => res.json())
+    .catch(err => console.log('Error: ', err))
+}
+
 const Photo = (props) => {
-  const { url, photoid } = props;
+  const { url, photoid, photoTags } = props;
 
   const dropTagList = props.tags.map((tag, index) => {
+
     return (
       <Dropdown.Item key={`tagDropDown${index}`}>
         <button
-          className="button-tag"
-        // onClick={() => props.handleAddTagPhoto(photoid, tag)}
+          className={photoTags.includes(tag.tag) ? "highlight-tag" : "button-tag"}
+          onClick={() => {
+            props.handleAddTagPhoto(photoid, tag);
+            addTagToPhoto(photoid, tag.tagid);
+          }}
         >{tag.tag}</button>
-      </Dropdown.Item>
+      </Dropdown.Item >
     )
   });
 

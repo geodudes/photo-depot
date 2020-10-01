@@ -12,6 +12,7 @@ const client = new W3CWebSocket('ws://localhost:3000');
 
 const mapStateToProps = state => ({
   photos: state.photos.photos,
+  filteredPhotos: state.photos.filteredPhotos,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,7 +41,10 @@ const MainGallery = (props) => {
 
   return (
     <div id="main-gallery">
-      <PhotosAll photos={props.photos} />
+      <PhotosAll 
+        photos={props.photos} 
+        filteredPhotos={props.filteredPhotos} 
+      />
     </div >
   )
 }
