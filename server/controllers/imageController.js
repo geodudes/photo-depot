@@ -5,7 +5,6 @@ const imageController = {};
 
 //GETS ALL USERS IMAGES FROM THE DATABASE
 imageController.getImages = (req, res, next) => {
-
   //hard-code userid until sessions set up
   const userid = 1;
 
@@ -51,10 +50,23 @@ imageController.addImage = (req, res, next) => {
   const now = new Date();
   const date = `${now.toDateString()}-${now.toTimeString().split(' ')[0]}`;
 
-  db.query(queries.addImage, [url, userid, date])
+  //default rating of 0
+  const rating = 0;
+
+  db.query(queries.addImage, [url, userid, date, rating])
     .then(data => {
+      const {
+        photoid
+      } = data.rows[0];
       res.locals.data = data.rows[0];
-      console.log(res.locals.data)
+      res.locals.websocket = {
+        userid,
+        url,
+        date,
+        photoid,
+        rating,
+        tags: []
+      }
       return next();
     })
     .catch(err => {

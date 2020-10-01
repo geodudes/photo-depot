@@ -19,6 +19,18 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
+//*** WEBSOCKETS ****/
+// I'm maintaining all active ws connections in this object
+const clients = {};
+// I'm maintaining all active ws users in this object
+const users = {};
+//install client and users to global middleware
+app.use((req, res, next) => {
+  res.locals.clients = clients;
+  res.locals.users = users;
+  return next()
+})
+
 // Webpack production
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
   // statically serve everything in the dist folder on the route
@@ -64,6 +76,7 @@ const server = app.listen(PORT, () => {
   console.log('Listening on ' + PORT);
 });
 
-wsServer(server);
+//start web socket server
+wsServer(server, clients, users);
 
 module.exports = app;

@@ -1,6 +1,11 @@
 const webSocketServer = require('websocket').server;
+const db = require('./models/model');
+const queries = require('./utils/queries');
+const {
+  sendMessage
+} = require('./utils/websockets')
 
-module.exports = (server) => {
+module.exports = (server, clients, users) => {
 
   const wsServer = new webSocketServer({
     httpServer: server
@@ -12,25 +17,8 @@ module.exports = (server) => {
     return s4() + s4() + '-' + s4();
   };
 
-  // I'm maintaining all active connections in this object
-  const clients = {};
-  // I'm maintaining all active users in this object
-  const users = {};
-  // The current editor content is maintained here.
-  let editorContent = null;
-  // User activity history.
-  let userActivity = [];
-
-  const sendMessage = (json) => {
-    // We are sending the current data to all connected clients
-    Object.keys(clients).map((client) => {
-      clients[client].sendUTF(json);
-    });
-  }
-
   const typesDef = {
-    USER_EVENT: "userevent",
-    CONTENT_CHANGE: "contentchange"
+    GET_IMAGES: "getimages"
   }
 
   wsServer.on('request', function (request) {
@@ -41,42 +29,43 @@ module.exports = (server) => {
     clients[userID] = connection;
     console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
     connection.on('message', function (message) {
+
       if (message.type === 'utf8') {
         const dataFromClient = JSON.parse(message.utf8Data);
+        console.log("message from client: ", userID, ". Message: ", dataFromClient)
         const json = {
           type: dataFromClient.type
         };
-        if (dataFromClient.type === typesDef.USER_EVENT) {
-          users[userID] = dataFromClient;
-          userActivity.push(`${dataFromClient.username} joined to edit the document`);
-          json.data = {
-            users,
-            userActivity
-          };
-        } else if (dataFromClient.type === typesDef.CONTENT_CHANGE) {
-          editorContent = dataFromClient.content;
-          json.data = {
-            editorContent,
-            userActivity
-          };
+        if (dataFromClient.type === typesDef.GET_IMAGES) {
+          //hard-code userid until sessions set up
+          const userid = 1;
+
+          db.query(queries.getImages, [userid])
+            .then(photos => {
+              db.query(queries.getAllImageTags, [userid])
+                .then(tags => {
+                  const tagObj = {};
+
+                  tags.rows.forEach(tag => {
+                    tagObj[tag.photoid] ? tagObj[tag.photoid].push(tag.tag) : tagObj[tag.photoid] = [tag.tag]
+                  })
+
+                  json.data = photos.rows.map(photo => {
+                    photo.tags = tagObj[photo.photoid] || []
+                    return photo;
+                  })
+                  sendMessage(json, clients);
+
+                })
+            })
         }
-        sendMessage(JSON.stringify(json));
       }
     });
     // user disconnected
     connection.on('close', function (connection) {
       console.log((new Date()) + " Peer " + userID + " disconnected.");
-      const json = {
-        type: typesDef.USER_EVENT
-      };
-      userActivity.push(`${users[userID].username} left the document`);
-      json.data = {
-        users,
-        userActivity
-      };
       delete clients[userID];
       delete users[userID];
-      sendMessage(JSON.stringify(json));
     });
   });
 }

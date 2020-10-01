@@ -5,14 +5,25 @@ export const getPhotos = (photos) => ({
   payload: photos,
 });
 
+export const appendPhoto = (photo) => ({
+  type: types.ADD_PHOTO,
+  payload: photo,
+});
+
 export const deletePhoto = (photoId) => ({
   type: types.DELETE_PHOTO,
   payload: photoId,
 });
 
-export const addRating = ({ photoId, rating }) => ({
+export const addRating = ({
+  photoId,
+  rating
+}) => ({
   type: types.ADD_RATING,
-  payload: { photoId, rating },
+  payload: {
+    photoId,
+    rating
+  },
 });
 
 export const getTags = (tags) => ({
@@ -21,12 +32,30 @@ export const getTags = (tags) => ({
 });
 
 // Need to wait to get new tagId from the server (database)
-export const addTag = ({ photoId, newTag: { tagId, tag } }) => ({
+export const addTag = ({
+  photoId,
+  newTag: {
+    tagId,
+    tag
+  }
+}) => ({
   type: types.ADD_TAG,
-  payload: { photoId, newTag },
+  payload: {
+    photoId,
+    newTag
+  },
 });
 
-export const removeTag = ({ photoId, trashTag: { tagId, tag } }) => ({
+export const removeTag = ({
+  photoId,
+  trashTag: {
+    tagId,
+    tag
+  }
+}) => ({
   type: types.REMOVE_TAG,
-  payload: { photoId, trashTag },
+  payload: {
+    photoId,
+    trashTag
+  },
 });
