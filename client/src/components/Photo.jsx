@@ -8,9 +8,13 @@ import {
   Dropdown
 } from 'react-bootstrap';
 
+const mapStateToProps = state => ({
+  tags: state.photos.tags,
+});
+
 const mapDispatchToProps = dispatch => ({
   handleDeletePhoto: (photoid) => dispatch(actions.deletePhoto(photoid)),
-  handleAddTag: (photoid, newTag) => dispatch(actions.addTag(photoid, newTag))
+  handleAddTagPhoto: (photoid, tagObj) => dispatch(actions.addTagPhoto(photoid, tagObj)),
 });
 
 const deleteFromServer = (id) => {
@@ -30,33 +34,51 @@ const deleteFromServer = (id) => {
 
 const Photo = (props) => {
   const { url, photoid } = props;
+
+  const dropTagList = props.tags.map((tag, index) => {
+    return (
+      <Dropdown.Item key={`tagDropDown${index}`}>
+        <button
+          className="button-tag"
+        // onClick={() => props.handleAddTagPhoto(photoid, tag)}
+        >{tag.tag}</button>
+      </Dropdown.Item>
+    )
+  });
+
   return (
     <div className="photo-container">
-      <div className="photo-options" >
+
+      {/* <div className="photo-options-hover" > */}
+      <div className="photo-options appear" >
         <>
           <Dropdown>
-            <Dropdown.Toggle variant="secondary" size="sm">
-              Tags
+            <Dropdown.Toggle variant="secondary" size="md" className="p-1">
+              Tag
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              {dropTagList}
             </Dropdown.Menu>
           </Dropdown>
         </>
 
-        <button photoid={photoid} onClick={() => {
-          props.handleDeletePhoto(photoid);
-          deleteFromServer(photoid);
-        }} >X</button>
+        <button
+          className="photo-delete-button"
+          photoid={photoid}
+          onClick={() => {
+            props.handleDeletePhoto(photoid);
+            deleteFromServer(photoid);
+          }}
+        >X</button>
       </div>
-
-      <img src={url}></img>
+      {/* </div> */}
+      <a href={url} >
+        <img src={url}></img>
+      </a>
     </div>
   )
 }
 
-export default connect(null, mapDispatchToProps)(Photo);
+export default connect(mapStateToProps, mapDispatchToProps)(Photo);
 
