@@ -41,12 +41,10 @@ const Photo = (props) => {
 
   const dropTagList = props.tags.map((tag, index) => {
 
-    const isTagged = photoTags.includes(tag.tag) ? true : false;
-
     return (
       <Dropdown.Item key={`tagDropDown${index}`}>
         <button
-          className={isTagged ? "highlight-tag" : "button-tag"}
+          className={photoTags.includes(tag.tag) ? "highlight-tag" : "button-tag"}
           onClick={() => {
             props.handleAddTagPhoto(photoid, tag);
             addTagToPhoto(photoid, tag.tagid);

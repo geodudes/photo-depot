@@ -6,6 +6,7 @@ const PhotosAll = (props) => {
 
   const displayPhotos = (photoArr) => {
     const photoGallery = [];
+    console.log('photoArr', photoArr)
     for (let i = photoArr.length - 1; i >= 0; i--) {
       photoGallery.push(
         <Photo

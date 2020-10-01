@@ -86,7 +86,7 @@ const photosReducer = (state = initialState, action) => {
       updatedPhotos = photosClone.map((photo) => {
         if (photo.photoid === action.payload.photoId) {
           // Add new tag object to the given photo's tags array
-          photo.tags.push(action.payload.tagObj);
+          photo.tags.push(action.payload.tagObj.tag);
         }
         return photo;
       });
