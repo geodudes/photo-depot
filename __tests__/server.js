@@ -105,8 +105,7 @@ describe('Route integration', () => {
       it('returns a list of images in the body of response', () => {
         const tagList = [{
           "tagid": 1,
-          "tag": "Monster Trucks",
-          "userid": "1"
+          "tag": "Monster Trucks"
         }];
         return request(server)
           .get('/tags')
