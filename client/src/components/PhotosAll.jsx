@@ -21,6 +21,7 @@ const PhotosAll = (props) => {
         <Photo
           key={`image${i}`}
           photoid={photos[i].photoid}
+          photoTags={photos[i].tags}
           url={photos[i].url}
         />
       );

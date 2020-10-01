@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import {
-  DropdownButton,
-  SplitButton,
-  ButtonGroup,
-  Dropdown
-} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 const mapStateToProps = state => ({
   tags: state.photos.tags,
@@ -42,19 +37,22 @@ const addTagToPhoto = (photoid, tagid) => {
 }
 
 const Photo = (props) => {
-  const { url, photoid } = props;
+  const { url, photoid, photoTags } = props;
 
   const dropTagList = props.tags.map((tag, index) => {
+
+    const isTagged = photoTags.includes(tag.tag) ? true : false;
+
     return (
       <Dropdown.Item key={`tagDropDown${index}`}>
         <button
-          className="button-tag"
+          className={isTagged ? "highlight-tag" : "button-tag"}
           onClick={() => {
             props.handleAddTagPhoto(photoid, tag);
             addTagToPhoto(photoid, tag.tagid);
           }}
         >{tag.tag}</button>
-      </Dropdown.Item>
+      </Dropdown.Item >
     )
   });
 
