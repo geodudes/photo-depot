@@ -96,25 +96,29 @@
 }
 
 .photo-options {
+  background: #6c757d;
+  // opacity: .60;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
-  top: 28px;
+  top: 26px;
+  visibility: hidden;
 }
 
-// .photo-options-hover {
-//   display: flex;
-//   position: relative;
-//   top: 28px;
-//   // background: grey;
-//   height: 27px;
-// }
-// .photo-options-hover:hover {
-//   display: none;
-//   .photo-options {
-//     display: flex;
-//   }
-// }
+.photo-container:hover > .photo-options {
+  visibility: visible;
+}
+
+.photo-delete-button {
+  color: #ffffff;
+  background: #6c757d;
+  border: none;
+  // border-radius: 4px;
+  outline: none;
+  width: 20%;
+  height: 9%;
+}
 
 #footer {
   background: #305F72;

@@ -32,26 +32,32 @@ const Photo = (props) => {
   const { url, photoid } = props;
   return (
     <div className="photo-container">
-      <div className="photo-options" >
-        <>
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary" size="sm">
-              Tags
-            </Dropdown.Toggle>
+      {/* <div className="photo-options-hover" > */}
+        <div className="photo-options appear" >
+          <>
+            <Dropdown>
+              <Dropdown.Toggle variant="secondary" size="md" className="m-1">
+                Tags
+              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </>
 
-        <button photoid={photoid} onClick={() => {
-          props.handleDeletePhoto(photoid);
-          deleteFromServer(photoid);
-        }} >X</button>
-      </div>
+          <button 
+            className="photo-delete-button"
+            photoid={photoid} 
+            onClick={() => {
+              props.handleDeletePhoto(photoid);
+              deleteFromServer(photoid);
+            }} 
+          >X</button>
+        </div>
+      {/* </div> */}
       <img src={url}></img>
     </div>
   )
