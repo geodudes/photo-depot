@@ -32,6 +32,15 @@ const deleteFromServer = (id) => {
     .catch(err => console.log('Error: ', err))
 }
 
+const addTagToPhoto = (photoid, tagid) => {
+  console.log('PUT')
+  fetch(`http://localhost:3000/tags/${tagid}?photoid=${photoid}`, {
+    method: 'PUT',
+  })
+    .then(res => res.json())
+    .catch(err => console.log('Error: ', err))
+}
+
 const Photo = (props) => {
   const { url, photoid } = props;
 
@@ -40,7 +49,10 @@ const Photo = (props) => {
       <Dropdown.Item key={`tagDropDown${index}`}>
         <button
           className="button-tag"
-          onClick={() => props.handleAddTagPhoto(photoid, tag)}
+          onClick={() => {
+            props.handleAddTagPhoto(photoid, tag);
+            addTagToPhoto(photoid, tag.tagid);
+          }}
         >{tag.tag}</button>
       </Dropdown.Item>
     )
