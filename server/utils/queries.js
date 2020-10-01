@@ -8,7 +8,7 @@ WHERE userid=$1`
 
 queries.addImage = `
 INSERT INTO photos(url, userid, date, rating)
-VALUES($1, $2, $3, 0)
+VALUES($1, $2, $3, $4)
 RETURNING photoid`
 
 queries.updateImage = `
@@ -29,7 +29,7 @@ ON t.tagid = pt.tagid
 WHERE pt.userid=$1`
 
 queries.getTags = `
-SELECT *
+SELECT tags.tag, tags.tagid
   FROM tags
 WHERE userid = $1 `
 

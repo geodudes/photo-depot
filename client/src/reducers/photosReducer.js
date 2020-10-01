@@ -1,7 +1,9 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  user: { logginIn: false },
+  user: {
+    logginIn: false
+  },
   photos: [],
   tags: [],
   inputTag: '',
@@ -19,7 +21,17 @@ const photosReducer = (state = initialState, action) => {
     case types.GET_PHOTOS:
       photos = action.payload;
 
-      return { ...state, photos };
+      return {
+        ...state, photos
+      };
+
+    case types.ADD_PHOTO:
+      photos = [...state.photos];
+      photos.push(action.payload);
+
+      return {
+        ...state, photos
+      };
 
     case types.DELETE_PHOTO:
       photosClone = JSON.parse(JSON.stringify(state.photos));
@@ -31,7 +43,9 @@ const photosReducer = (state = initialState, action) => {
         });
       console.log('updated photos', updatedPhotos)
 
-      return { ...state, photos: updatedPhotos };
+      return {
+        ...state, photos: updatedPhotos
+      };
 
     case types.ADD_RATING:
       photosClone = JSON.parse(JSON.stringify(state.photos));
@@ -42,12 +56,16 @@ const photosReducer = (state = initialState, action) => {
         }
       });
 
-      return { ...state, photos: updatedPhotos };
+      return {
+        ...state, photos: updatedPhotos
+      };
 
     case types.GET_TAGS:
       updatedTags = action.payload;
 
-      return { ...state, tags: updatedTags };
+      return {
+        ...state, tags: updatedTags
+      };
 
     case types.INPUT_TAG:
       updatedTagName = action.payload;
@@ -76,7 +94,9 @@ const photosReducer = (state = initialState, action) => {
     //   });
 
       // COME BACK AND CHECK FOR DUPLICATES
-      return { ...state, photos: updatedPhotos, tags: updatedTags };
+      return {
+        ...state, photos: updatedPhotos, tags: updatedTags
+      };
 
     case types.REMOVE_TAG:
       photosClone = JSON.parse(JSON.stringify(state.photos));
@@ -96,7 +116,9 @@ const photosReducer = (state = initialState, action) => {
       });
 
       // COME BACK AND CHECK FOR DUPLICATES
-      return { ...state, photos: updatedPhotos, tags: updatedTags };
+      return {
+        ...state, photos: updatedPhotos, tags: updatedTags
+      };
 
     default:
       return state;
