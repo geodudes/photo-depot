@@ -86,7 +86,6 @@
 
 .photo-container {
   margin: 30px !important;
-  
 }
 
 .photo-container > img {
@@ -99,7 +98,23 @@
 .photo-options {
   display: flex;
   justify-content: space-between;
+  position: relative;
+  top: 28px;
 }
+
+// .photo-options-hover {
+//   display: flex;
+//   position: relative;
+//   top: 28px;
+//   // background: grey;
+//   height: 27px;
+// }
+// .photo-options-hover:hover {
+//   display: none;
+//   .photo-options {
+//     display: flex;
+//   }
+// }
 
 #footer {
   background: #305F72;

@@ -52,7 +52,6 @@ const Photo = (props) => {
           deleteFromServer(photoid);
         }} >X</button>
       </div>
-
       <img src={url}></img>
     </div>
   )
