@@ -40,7 +40,7 @@ const Photo = (props) => {
       <Dropdown.Item key={`tagDropDown${index}`}>
         <button
           className="button-tag"
-        // onClick={() => props.handleAddTagPhoto(photoid, tag)}
+          onClick={() => props.handleAddTagPhoto(photoid, tag)}
         >{tag.tag}</button>
       </Dropdown.Item>
     )

@@ -81,6 +81,7 @@ const photosReducer = (state = initialState, action) => {
       return { ...state, tags: tagsClone };
 
     case types.ADD_TAG_PHOTO:
+      console.log('ADD_TAG_PHOTO!!!')
       photosClone = JSON.parse(JSON.stringify(state.photos));
 
       updatedPhotos = photosClone.map((photo) => {
@@ -88,13 +89,11 @@ const photosReducer = (state = initialState, action) => {
           // Add new tag object to the given photo's tags array
           photo.tags.push(action.payload.tagObj);
         }
+        return photo;
       });
 
       // COME BACK AND CHECK FOR DUPLICATES
-      // return { ...state, photos: updatedPhotos };
-      return {
-        ...state, photos: updatedPhotos, tags: updatedTags
-      };
+      return { ...state, photos: updatedPhotos };
 
     case types.REMOVE_TAG:
       photosClone = JSON.parse(JSON.stringify(state.photos));

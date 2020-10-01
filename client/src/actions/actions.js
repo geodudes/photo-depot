@@ -48,12 +48,12 @@ export const addTagPhoto = (photoId, tagObj) => ({
 });
 
 // Need to wait to get new tagId from the server (database)
-export const addTag = ({ photoId, newTag: { tagId, tag }}) => ({
+export const addTag = ({ photoId, newTag: { tagId, tag } }) => ({
   type: types.ADD_TAG,
   payload: { photoId, newTag },
 });
 
-export const removeTag = ({ photoId, trashTag: { tagId, tag }}) => ({
+export const removeTag = ({ photoId, trashTag: { tagId, tag } }) => ({
   type: types.REMOVE_TAG,
   payload: { photoId, trashTag },
 });
