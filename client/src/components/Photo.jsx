@@ -8,6 +8,10 @@ import {
   Dropdown
 } from 'react-bootstrap';
 
+const mapStateToProps = state => ({
+  tags: state.photos.tags,
+});
+
 const mapDispatchToProps = dispatch => ({
   handleDeletePhoto: (photoid) => dispatch(actions.deletePhoto(photoid)),
   handleAddTag: (photoid, newTag) => dispatch(actions.addTag(photoid, newTag))
@@ -30,6 +34,17 @@ const deleteFromServer = (id) => {
 
 const Photo = (props) => {
   const { url, photoid } = props;
+
+  const dropTagList = props.tags.map((tag, index) => {
+    return (
+      <Dropdown.Item key={`tagDropDown${index}`}>
+        <button
+          className="button-tag"
+        >{tag.tag}</button>
+      </Dropdown.Item>
+    )
+  });
+
   return (
     <div className="photo-container">
 
@@ -39,12 +54,10 @@ const Photo = (props) => {
           <Dropdown>
             <Dropdown.Toggle variant="secondary" size="md" className="p-1">
               Tag
-                </Dropdown.Toggle>
+            </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              {dropTagList}
             </Dropdown.Menu>
           </Dropdown>
         </>
@@ -66,5 +79,5 @@ const Photo = (props) => {
   )
 }
 
-export default connect(null, mapDispatchToProps)(Photo);
+export default connect(mapStateToProps, mapDispatchToProps)(Photo);
 
