@@ -104,7 +104,7 @@
   margin: 30px !important;
 }
 
-.photo-container > img {
+.photo-container * img {
   width:  250px;
   height: 250px;
   object-fit: cover;
