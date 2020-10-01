@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleDeletePhoto: (photoid) => dispatch(actions.deletePhoto(photoid)),
-  handleAddTag: (photoid, newTag) => dispatch(actions.addTag(photoid, newTag))
+  handleAddTagPhoto: (photoid, tagObj) => dispatch(actions.addTagPhoto(photoid, tagObj)),
 });
 
 const deleteFromServer = (id) => {
@@ -40,6 +40,7 @@ const Photo = (props) => {
       <Dropdown.Item key={`tagDropDown${index}`}>
         <button
           className="button-tag"
+        // onClick={() => props.handleAddTagPhoto(photoid, tag)}
         >{tag.tag}</button>
       </Dropdown.Item>
     )

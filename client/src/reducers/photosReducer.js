@@ -60,23 +60,20 @@ const photosReducer = (state = initialState, action) => {
       tagsClone = JSON.parse(JSON.stringify(state.tags));
       tagsClone.push(action.payload);
 
-      return { ...state, tags: tagsClone};
+      return { ...state, tags: tagsClone };
 
-    // case types.ADD_TAG:
-    //   photosClone = JSON.parse(JSON.stringify(state.photos));
-    //   tagsClone = JSON.parse(JSON.stringify(state.tags));
+    case types.ADD_TAG_PHOTO:
+      photosClone = JSON.parse(JSON.stringify(state.photos));
 
-    //   updatedPhotos = photosClone.map((photo) => {
-    //     if (photo.photoid === action.payload.photoId) {
-    //       // Add new tag object to the given photo's tags array
-    //       photo.tags.push(action.payload.newTag);
-    //       // Add new tag object to available tags array
-    //       updatedTags = tagsClone.push(action.payload.newTag);
-    //     }
-    //   });
+      updatedPhotos = photosClone.map((photo) => {
+        if (photo.photoid === action.payload.photoId) {
+          // Add new tag object to the given photo's tags array
+          photo.tags.push(action.payload.tagObj);
+        }
+      });
 
       // COME BACK AND CHECK FOR DUPLICATES
-      return { ...state, photos: updatedPhotos, tags: updatedTags };
+      return { ...state, photos: updatedPhotos };
 
     case types.REMOVE_TAG:
       photosClone = JSON.parse(JSON.stringify(state.photos));
