@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import Photos from '../components/Photos'
 import PhotosAll from '../components/PhotosAll'
 import {
   w3cwebsocket as W3CWebSocket
@@ -38,7 +37,7 @@ const MainGallery = (props) => {
       }
     }
   }, []);
-  console.log("PHOTOS", props.photos)
+
   return (
     <div id="main-gallery">
       <PhotosAll photos={props.photos} />
