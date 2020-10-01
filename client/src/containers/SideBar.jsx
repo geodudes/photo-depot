@@ -64,7 +64,7 @@ const SideBar = (props) => {
   });
 
   return (
-    <>
+    <div className="sidebar-container">
       <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
@@ -89,18 +89,8 @@ const SideBar = (props) => {
           {/* <Button varianßt="outline-secondary" className="px-3" onClick={handleTagClick}>+</Button> */}
           </InputGroup.Append>
         </InputGroup>
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Click me!
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body>Hello! I'm another body</Card.Body>
-          </Accordion.Collapse>
-        </Card>
       </Accordion>
-    </>
+    </div>
   )
 }
 
