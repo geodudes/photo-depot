@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
+import {
+  DropdownButton,
+  SplitButton,
+  ButtonGroup,
+  Dropdown
+} from 'react-bootstrap';
 
-// const mapStateToProps = state => ({
-//     photos: state.photos.photos,
-//   });
-  
 const mapDispatchToProps = dispatch => ({
   handleDeletePhoto: (photoid) => dispatch(actions.deletePhoto(photoid)),
   handleAddTag: (photoid, newTag) => dispatch(actions.addTag(photoid, newTag))
@@ -22,21 +24,36 @@ const deleteFromServer = (id) => {
     //   url: imageUrl
     // })
   })
-  .then(res => res.json())
-  .catch(err => console.log('Error: ', err))
+    .then(res => res.json())
+    .catch(err => console.log('Error: ', err))
 }
 
 const Photo = (props) => {
   const { url, photoid } = props;
   return (
-    <div className="photo">
-      <button photoid={photoid} onClick={() => {
-        props.handleDeletePhoto(photoid);
-        deleteFromServer(photoid);
-      }} >X</button>
+    <div className="photo-container">
+      <div className="photo-options" >
+        <>
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" size="sm">
+              Tags
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </>
+
+        <button photoid={photoid} onClick={() => {
+          props.handleDeletePhoto(photoid);
+          deleteFromServer(photoid);
+        }} >X</button>
+      </div>
+
       <img src={url}></img>
-      <input type="text"/>
-      <button onClick={() => props.handleAddTag()}>Save Tag</button>
     </div>
   )
 }
