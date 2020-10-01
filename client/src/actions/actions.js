@@ -31,6 +31,17 @@ export const getTags = (tags) => ({
   payload: tags,
 });
 
+export const inputTag = (input) => ({
+  type: types.INPUT_TAG,
+  payload: input,
+});
+
+// Add tag to array in state
+export const addTagType = (tagObj) => ({
+  type: types.ADD_TAG_TYPE,
+  payload: tagObj,
+});
+
 // Need to wait to get new tagId from the server (database)
 export const addTag = ({
   photoId,

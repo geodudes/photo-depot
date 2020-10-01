@@ -1,5 +1,4 @@
 import React from 'react';
-import Login from './Login';
 import Header from './containers/Header.jsx';
 import SearchBar from './containers/SearchBar.jsx';
 import SideBar from './containers/SideBar.jsx';
@@ -10,7 +9,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 function App() {
   return (
     <div id='App'>
-      <Login />
       <Container fluid>
         <Row>
           <Col>
@@ -19,7 +17,7 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <SearchBar />
+            {/* <SearchBar /> */}
           </Col>
         </Row>
         <Row>
@@ -32,7 +30,7 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <Footer />
+            {/* <Footer /> */}
           </Col>
         </Row>
       </Container>

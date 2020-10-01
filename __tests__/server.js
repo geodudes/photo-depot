@@ -1,5 +1,4 @@
 const request = require('supertest');
-
 const server = 'http://localhost:3000';
 
 /**
@@ -16,6 +15,11 @@ describe('Route integration', () => {
           .get('/')
           .expect('Content-Type', /text\/html/)
           .expect(200);
+      });
+      it('responds with 400 status when the route is nonsese', () => {
+        return request(server)
+          .get('/aklsjdfljasdfoiasf9jiaf')
+          .expect(400);
       });
     });
   });

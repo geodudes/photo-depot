@@ -6,6 +6,7 @@ const initialState = {
   },
   photos: [],
   tags: [],
+  inputTag: '',
 };
 
 const photosReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ const photosReducer = (state = initialState, action) => {
   let updatedPhotos;
   let tagsClone;
   let updatedTags;
+  let updatedTagName;
 
   switch (action.type) {
     case types.GET_PHOTOS:
@@ -35,8 +37,11 @@ const photosReducer = (state = initialState, action) => {
       photosClone = JSON.parse(JSON.stringify(state.photos));
 
       updatedPhotos = photosClone.filter(
-        (photo) => photo.photoid !== action.payload
-      );
+        (photo) => {
+          console.log(photo.photoid, action.payload)
+          return photo.photoid !== action.payload
+        });
+      console.log('updated photos', updatedPhotos)
 
       return {
         ...state, photos: updatedPhotos
@@ -62,18 +67,31 @@ const photosReducer = (state = initialState, action) => {
         ...state, tags: updatedTags
       };
 
-    case types.ADD_TAG:
-      photosClone = JSON.parse(JSON.stringify(state.photos));
-      tagsClone = JSON.parse(JSON.stringify(state.tags));
+    case types.INPUT_TAG:
+      updatedTagName = action.payload;
 
-      updatedPhotos = photosClone.map((photo) => {
-        if (photo.photoid === action.payload.photoId) {
-          // Add new tag object to the given photo's tags array
-          photo.tags.push(action.payload.newTag);
-          // Add new tag object to available tags array
-          updatedTags = tagsClone.push(action.payload.newTag);
-        }
-      });
+      return { ...state, inputTag: updatedTagName };
+
+    case types.ADD_TAG_TYPE:
+      // Note: Duplicate tags already handled by server on submit
+
+      tagsClone = JSON.parse(JSON.stringify(state.tags));
+      tagsClone.push(action.payload);
+
+      return { ...state, tags: tagsClone};
+
+    // case types.ADD_TAG:
+    //   photosClone = JSON.parse(JSON.stringify(state.photos));
+    //   tagsClone = JSON.parse(JSON.stringify(state.tags));
+
+    //   updatedPhotos = photosClone.map((photo) => {
+    //     if (photo.photoid === action.payload.photoId) {
+    //       // Add new tag object to the given photo's tags array
+    //       photo.tags.push(action.payload.newTag);
+    //       // Add new tag object to available tags array
+    //       updatedTags = tagsClone.push(action.payload.newTag);
+    //     }
+    //   });
 
       // COME BACK AND CHECK FOR DUPLICATES
       return {

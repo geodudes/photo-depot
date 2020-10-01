@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Photos from '../components/Photos'
+import PhotosAll from '../components/PhotosAll'
 import {
   w3cwebsocket as W3CWebSocket
 } from "websocket";
 
 //initialize websocket connection
 const client = new W3CWebSocket('ws://localhost:3000');
+
 
 const mapStateToProps = state => ({
   photos: state.photos.photos,
@@ -39,8 +41,8 @@ const MainGallery = (props) => {
   console.log("PHOTOS", props.photos)
   return (
     <div id="main-gallery">
-      <Photos photos={props.photos} />
-    </div>
+      <PhotosAll photos={props.photos} />
+    </div >
   )
 }
 
