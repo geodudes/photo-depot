@@ -36,8 +36,8 @@ const Photo = (props) => {
         <div className="photo-options appear" >
           <>
             <Dropdown>
-              <Dropdown.Toggle variant="secondary" size="md" className="m-1">
-                Tags
+              <Dropdown.Toggle variant="secondary" size="md" className="p-1">
+                Tag
               </Dropdown.Toggle>
 
               <Dropdown.Menu>

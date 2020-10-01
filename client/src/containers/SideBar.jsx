@@ -82,9 +82,12 @@ const SideBar = (props) => {
         </Card>
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <Button varianßt="outline-secondary" onClick={handleTagClick}>+ Tag</Button>
+            <Button varianßt="outline-secondary" className="px-3" onClick={handleTagClick}>+</Button>
           </InputGroup.Prepend>
           <FormControl aria-describedby="basic-addon1" onChange={e => props.handleTagInput(e.target.value)} />
+          <InputGroup.Append>
+          {/* <Button varianßt="outline-secondary" className="px-3" onClick={handleTagClick}>+</Button> */}
+          </InputGroup.Append>
         </InputGroup>
         <Card>
           <Card.Header>
